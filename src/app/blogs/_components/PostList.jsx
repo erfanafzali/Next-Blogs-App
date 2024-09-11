@@ -2,13 +2,11 @@ import CoverImage from "./CoverImage";
 import Link from "next/link";
 import { FaRegClock } from "react-icons/fa";
 import Author from "./Author";
+import PostInteraction from "./BlogInteraction";
+import { getPosts } from "@/services/postServices";
 
 async function PostList() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/post/list`);
-  const {
-    data: { posts },
-  } = await res.json();
-  console.log({ posts });
+  const posts = await getPosts();
 
   if (!posts.length) return null;
 
@@ -17,7 +15,7 @@ async function PostList() {
       {posts.map((post) => (
         <div
           key={post._id}
-          className="border border-secondary-300 rounded-md  p-2 "
+          className="border border-secondary-300 rounded-md p-2 "
         >
           <CoverImage {...post} />
 
@@ -42,7 +40,7 @@ async function PostList() {
               </div>
             </div>
             {/* blog interactioin */}
-            {/* <BlogInteraction post={post} /> */}
+            <PostInteraction post={post} />
           </div>
         </div>
       ))}
