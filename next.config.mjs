@@ -5,10 +5,18 @@ const nextConfig = {
       {
         protocol: "http",
         hostname: "localhost",
-        port:"5000",
+        port: "5000",
         pathname: "/uploads/**",
       },
     ],
+  },
+  logging: {
+    fetches: {
+      fullUrl: true,
+    },
+  },
+  experimental: {
+    ppr: "incremental",
   },
 };
 

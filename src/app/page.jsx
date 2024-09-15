@@ -26,6 +26,11 @@ export default function Home() {
             <Link href="/profile">مدیریت بلاگ ها</Link>
           </Button>
         </div>
+        <span >
+          <svg className="icon-dashboard " viewBox="0 0 0 0">
+            <path d="M12 2L1 21h22L12 2z" fill="#1111" />
+          </svg>
+        </span>
       </div>
     </div>
   );

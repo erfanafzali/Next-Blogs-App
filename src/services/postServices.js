@@ -1,3 +1,5 @@
+import next from "next";
+
 export async function getPostBySlug(slug) {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/post/slug/${slug}`
@@ -9,7 +11,9 @@ export async function getPostBySlug(slug) {
 }
 
 export async function getPosts() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/post/list`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/post/list`, {
+    cache: "force-cache",
+  });
   const { data } = await res.json();
 
   const { posts } = data || {};
