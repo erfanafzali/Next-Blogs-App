@@ -1,14 +1,14 @@
-import { Suspense } from "react";
+ import { Suspense } from "react";
 import PostList from "../_components/PostList";
 import Spinner from "@/components/ui/Spinner";
-
+ 
 export const metadata = {
   title: "بلاگ ها",
 };
 
 // how to revalidate time-based:
-export const revalidate = 60 * 60;
-export const experimental_ppr = true;
+// export const revalidate = 60 * 60;
+// export const experimental_ppr = true;
 
 // after 1h re-build ==>
 // 1. path time interval

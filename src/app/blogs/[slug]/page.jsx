@@ -33,6 +33,9 @@ async function SinglePost({ params }) {
       <div className="relative aspect-video  overflow-hidden rounded-lg mb-10">
         <Image
           className="object-cover object-center hover:scale-110 transition-all ease-out duration-300"
+          priority
+          sizes="(max-width: 1400px)"
+          alt={post.title}
           fill
           src={post.coverImageUrl}
         />
