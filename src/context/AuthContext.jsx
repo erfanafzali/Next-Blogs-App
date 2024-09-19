@@ -88,12 +88,12 @@ export default function AuthProvider({ children }) {
       const { user, message } = await getUserApi();
       dispatch({ type: "user/loaded", payload: user });
       console.log(user);
-      toast.success(user.name + " " + "خوش آمدید");
+      // toast.success(user.name + " " + "خوش آمدید");
       router.push("/");
     } catch (error) {
       const errorMsg = error?.response?.data?.message;
       dispatch({ type: "rejected", payload: errorMsg });
-      toast.error(errorMsg);
+      // toast.error(errorMsg);
     }
   }
 

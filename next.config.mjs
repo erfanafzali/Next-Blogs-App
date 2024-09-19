@@ -10,11 +10,11 @@ const nextConfig = {
       },
     ],
   },
-  logging: {
-    fetches: {
-      fullUrl: true,
-    },
-  },
+  // logging: {
+  //   fetches: {
+  //     fullUrl: true,
+  //   },
+  // },
   experimental: {
     ppr: "incremental",
   },
