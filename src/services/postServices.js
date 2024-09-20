@@ -1,4 +1,4 @@
-import next from "next";
+import http from "./httpService";
 
 export async function getPostBySlug(slug) {
   const res = await fetch(
@@ -10,13 +10,22 @@ export async function getPostBySlug(slug) {
   return post;
 }
 
-export async function getPosts() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/post/list`, {
-    cache: "force-cache",
-  });
+export async function getPosts(options) {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/post/list`,
+    options
+  );
   const { data } = await res.json();
 
   const { posts } = data || {};
 
   return posts;
+}
+
+export async function likePostApi(postId) {
+  return http.post(`/post/like/${postId}`).then(({ data }) => data.data);
+}
+
+export async function bookmarkPostApi(postId) {
+  return http.post(`/post/bookmark/${postId}`).then(({ data }) => data.data);
 }
