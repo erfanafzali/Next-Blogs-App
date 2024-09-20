@@ -3,14 +3,10 @@ import Link from "next/link";
 import { FaRegClock } from "react-icons/fa";
 import Author from "./Author";
 import PostInteraction from "./BlogInteraction";
-import { getPosts } from "@/services/postServices";
-import { cookies } from "next/headers";
-import setCookiesOnReq from "@/utils/setCookieOnReq";
+ 
 
-async function PostList() {
-  const cookieStore = cookies();
-  const options = setCookiesOnReq(cookieStore);
-  const posts = await getPosts(options);
+async function PostList({posts}) {
+
 
   if (!posts.length) return null;
 

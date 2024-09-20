@@ -1,7 +1,8 @@
- import { Suspense } from "react";
+import { cookies } from "next/headers";
 import PostList from "../_components/PostList";
-import Spinner from "@/components/ui/Spinner";
- 
+import setCookiesOnReq from "@/utils/setCookieOnReq";
+import { getPosts } from "@/services/postServices";
+
 export const metadata = {
   title: "بلاگ ها",
 };
@@ -17,12 +18,13 @@ export const metadata = {
 // update data will be shown to the next user !! ==> ISR =>inceremental static re-generation
 
 async function BlogPage() {
+  const cookieStore = cookies();
+  const options = setCookiesOnReq(cookieStore);
+  const posts = await getPosts(options);
+
   return (
     <div className="w-full">
-      {/* <h2 className="font-bold md:text-xl mb-4">بلاگ ها</h2> */}
-      <Suspense fallback={<Spinner />}>
-        <PostList />
-      </Suspense>
+      <PostList posts={posts} />
     </div>
   );
 }
