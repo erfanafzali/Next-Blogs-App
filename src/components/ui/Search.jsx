@@ -8,7 +8,6 @@ export default function Search() {
   const searchParams = useSearchParams();
   const pathname = usePathname();
 
-
   const formSubmit = (e) => {
     e.preventDefault();
     const search = e.target.search;
@@ -18,12 +17,12 @@ export default function Search() {
     const newParams = new URLSearchParams(searchParams.toString());
 
     if (searchValue) {
-      newParams.set("search", searchValue);
+      newParams.set("q", searchValue);
     } else {
-      newParams.delete("search");
+      newParams.delete("q");
     }
 
-     router.push(pathname + "?" + newParams.toString(), { scroll: false });
+    router.push(pathname + "?" + newParams.toString());
   };
 
   return (

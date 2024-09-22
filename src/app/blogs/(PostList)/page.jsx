@@ -7,14 +7,13 @@ import PostList from "../_components/PostList";
 // export const metadata = {
 //   title: "بلاگ ها",
 // };
-
 async function BlogPage({ searchParams }) {
   const queries = queryString.stringify(searchParams);
-
+  console.log(queries);
   const cookieStore = cookies();
   const options = setCookiesOnReq(cookieStore);
   const posts = await getPosts(queries, options);
-
+  console.log({ posts });
   return (
     <div className="w-full">
       <PostList posts={posts} />
