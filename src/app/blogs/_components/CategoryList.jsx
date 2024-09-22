@@ -1,11 +1,10 @@
 import Link from "next/link";
- 
+
 async function CategoryList() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/category/list`);
   const {
     data: { categories },
   } = await res.json();
-  console.log({ categories });
 
   return (
     <div className="w-full ">

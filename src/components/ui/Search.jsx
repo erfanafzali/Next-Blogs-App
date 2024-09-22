@@ -1,13 +1,33 @@
 "use client";
 
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { FiSearch } from "react-icons/fi";
 
-
 export default function Search() {
- 
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+
+
+  const formSubmit = (e) => {
+    e.preventDefault();
+    const search = e.target.search;
+    const searchValue = search.value;
+
+    //url
+    const newParams = new URLSearchParams(searchParams.toString());
+
+    if (searchValue) {
+      newParams.set("search", searchValue);
+    } else {
+      newParams.delete("search");
+    }
+
+     router.push(pathname + "?" + newParams.toString(), { scroll: false });
+  };
 
   return (
-    <form  className="relative w-full lg:w-1/3">
+    <form className="relative w-full lg:w-1/3" onSubmit={formSubmit}>
       <input
         type="text"
         name="search"

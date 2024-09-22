@@ -13,6 +13,7 @@
     "@tailwindcss/forms": "^0.5.8",
     "axios": "^1.7.7",
     "next": "^15.0.0-rc.0",
+    "query-string": "^9.1.0",
     "react": "^19.0.0-rc-3dfd5d9e-20240910",
     "react-dom": "^19.0.0-rc-3dfd5d9e-20240910",
     "react-hot-toast": "^2.4.1",
