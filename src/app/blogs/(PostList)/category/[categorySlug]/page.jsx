@@ -1,25 +1,32 @@
 import PostList from "@/app/blogs/_components/PostList";
+import { getPosts } from "@/services/postServices";
+import setCookiesOnReq from "@/utils/setCookieOnReq";
+import { cookies } from "next/headers";
+import queryString from "query-string";
 
-async function Category({ params }) {
+async function Category({ params, searchParams }) {
   const { categorySlug } = params;
+  const queries =
+    queryString.stringify(searchParams) + "&" + `categorySlug=${categorySlug}`;
 
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/post/list?categorySlug=${categorySlug}`
-  );
+  const cookieStore = cookies();
+  const options = setCookiesOnReq(cookieStore);
+  const posts = await getPosts(queries, options);
 
-  const { data } = await res.json();
-  const { posts } = data || {};
+  const { q } = searchParams;
 
   return (
-    <div>
-      {posts.length === 0 ? (
-        <p className="w-full text-center font-bold text-xl text-secondary-600 mt-20">
-          پستی در این دسته بندی پیدا نشد
+    <>
+      {q ? (
+        <p className="mb-4 text-secondary-700">
+          {posts.length === 0
+            ? "هیچ پستی با این مشخصات پیدا نشد"
+            : `نتیجه برای ${posts.length} نشان دادن`}
+          <span className="font-bold">&quot;{q}&quot;</span>
         </p>
-      ) : (
-        <PostList posts={posts}/>
-      )}
-    </div>
+      ) : null}
+      <PostList posts={posts} />
+    </>
   );
 }
 
