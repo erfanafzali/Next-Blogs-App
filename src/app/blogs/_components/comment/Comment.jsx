@@ -9,8 +9,8 @@ function Comment({ comment, onAddComment }) {
       <div className="flex items-center justify-between mb-5 border-b border-b-secondary-200/60 pb-2">
         <div className="flex items-center ">
           <Avatar
-            height={34}
-            width={34}
+            height={32}
+            width={32}
             alt={comment.user?.name || "-"}
             src={comment.user.avatarUrl}
           />
@@ -28,7 +28,7 @@ function Comment({ comment, onAddComment }) {
               variant="secondary"
               className="text-sm flex gap-x-1 p-1 rounded-lg text-secondary-500 bg-secondary-200"
             >
-              <span className="ml-1">
+              <span className="ml-1 mt-1 ">
                 <BsArrowReturnRight className="w-4" />
               </span>
               <span>پاسخ</span>
