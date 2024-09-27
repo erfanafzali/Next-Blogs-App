@@ -1,9 +1,22 @@
 import useOutsideClick from "@/hooks/useOutsideClick";
-import { IoCloseCircleOutline } from "react-icons/io5";
+import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
+import { IoCloseCircleOutline } from "react-icons/io5";
 
 function Modal({ open, onClose, title, children, description = "" }) {
+  const [mounted, setMounted] = useState(false);
   const ref = useOutsideClick(onClose);
+
+
+  // در این کد، از useEffect برای تنظیم حالت “mounted” استفاده شده است
+  // . وقتی که کامپوننت روی کلاینت نصب می‌شود، mounted به true تغییر می‌کند و به این ترتیب createPortal
+  //  تنها در محیط مرورگر اجرا خواهد شد.
+  useEffect(() => {
+    setMounted(true);
+    return () => setMounted(false);
+  }, []);
+
+  if (!mounted) return null;
 
   return (
     open &&
@@ -40,3 +53,4 @@ function Modal({ open, onClose, title, children, description = "" }) {
   );
 }
 export default Modal;
+ 
