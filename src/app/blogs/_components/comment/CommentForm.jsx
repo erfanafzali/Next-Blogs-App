@@ -2,6 +2,7 @@
 
 import Button from "@/components/ui/Button";
 import TextArea from "@/components/ui/TextArea";
+import { createComment } from "@/lib/actions";
 import { useState } from "react";
 
 const CommentForm = () => {
@@ -10,7 +11,7 @@ const CommentForm = () => {
     <div>
       <div className="flex justify-center mt-4">
         <div className="max-w-md  w-full">
-          <form className="space-y-7">
+          <form action={createComment} className="space-y-7">
             <TextArea
               name="text"
               label="متن نظر"
