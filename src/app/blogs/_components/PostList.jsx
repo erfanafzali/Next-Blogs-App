@@ -3,12 +3,9 @@ import Link from "next/link";
 import { FaRegClock } from "react-icons/fa";
 import Author from "./Author";
 import PostInteraction from "./BlogInteraction";
- 
 
-async function PostList({posts}) {
-
-
-  
+async function PostList({ posts }) {
+  if (!posts) return <div>پستی یافت نشد</div>;
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center items-center gap-8">

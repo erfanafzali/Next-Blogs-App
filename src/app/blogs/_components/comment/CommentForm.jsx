@@ -1,17 +1,45 @@
 "use client";
 
-import Button from "@/components/ui/Button";
+import Loading from "@/components/ui/Loading";
+import SubmitButton from "@/components/ui/SubmissionButton";
 import TextArea from "@/components/ui/TextArea";
 import { createComment } from "@/lib/actions";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useActionState } from "react";
+import toast from "react-hot-toast";
 
-const CommentForm = () => {
+const initialState = {
+  error: "",
+  message: "",
+};
+
+const CommentForm = ({ postId, parentId, onClose }) => {
   const [text, setText] = useState("");
+  const [state, formAction] = useActionState(createComment, initialState); //useFormState ==> react V18 but useActionState ==> React V19
+  // const createCommentWithData = createComment.bind(null, postId, parentId);
+
+  useEffect(() => {
+    if (state?.message) {
+      toast.success(state.message);
+      onClose();
+    }
+    if (state?.error) {
+      toast.error(state.error);
+    }
+  }, [state]);
+
+  const { pending } = useActionState();
+
   return (
     <div>
       <div className="flex justify-center mt-4">
         <div className="max-w-md  w-full">
-          <form action={createComment} className="space-y-7">
+          <form
+            action={async (formData) => {
+              await formAction({ formData, postId, parentId });
+            }}
+            className="space-y-7"
+          >
             <TextArea
               name="text"
               label="متن نظر"
@@ -20,7 +48,17 @@ const CommentForm = () => {
               onChange={(e) => setText(e.target.value)}
             />
 
-            <Button>تایید</Button>
+            <div className="mt-8">
+              {pending ? (
+                <div>
+                  <Loading />
+                </div>
+              ) : (
+                <SubmitButton type="submit" className="w-full">
+                  {parentId ? "ثبت پاسخ" : "ثبت نظر"}
+                </SubmitButton>
+              )}
+            </div>
           </form>
         </div>
       </div>
